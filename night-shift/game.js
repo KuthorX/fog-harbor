@@ -1,8 +1,9 @@
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const storageKey="chord-night-shift",initial={shift:0,view:"brief",evidence:0,recorded:[],submitted:[],identity:"",debts:[],tools:[],ruleRefresh:0,frequency:8,energy:0,started:false,complete:false,cycle:0,signedRule:""};
+const storageKey="chord-night-shift",initial={shift:0,view:"brief",evidence:0,recorded:[],submitted:[],identity:"",debts:[],tools:[],ruleRefresh:0,frequency:8,wavelength:450,energy:0,started:false,complete:false,cycle:0,signedRule:""};
 let state={...initial,...JSON.parse(localStorage.getItem(storageKey)||"{}")};
 if(state.complete&&state.shift===2&&!state.signedRule){state.complete=false;state.shift=3;state.view="brief"}
-const cases=[{code:"N-00",title:"入职守则"},{code:"N-01",title:"最后一个宾语"},{code:"N-02",title:"雨停以前"},{code:"N-03",title:"听不见的第四轨"},{code:"N-04",title:"正确答案"},{code:"N-05",title:"守则的作者"}];
+if(state.complete&&state.cycle&&state.submitted.includes("N-05:limited-authority")&&!state.submitted.includes("N-10:open-mix")){state.complete=false;state.shift=6;state.view="brief"}
+const cases=[{code:"N-00",title:"入职守则"},{code:"N-01",title:"最后一个宾语"},{code:"N-02",title:"雨停以前"},{code:"N-03",title:"听不见的第四轨"},{code:"N-04",title:"正确答案"},{code:"N-05",title:"守则的作者"},{code:"N-06",title:"投错的人"},{code:"N-07",title:"绿色不是温度"},{code:"N-08",title:"三种说法"},{code:"N-09",title:"未送达的人"},{code:"N-10",title:"第十一声部"}];
 function save(){localStorage.setItem(storageKey,JSON.stringify(state))}
 function setState(p){Object.assign(state,p);save();render()}
 function begin(){state={...initial,started:true};save();render()}
@@ -20,7 +21,7 @@ function render(){
 }
 
 function boot(){return `<div class="complete"><div><small>CHORD SYSTEM / LOCAL BOOT</small><h1>苍绿之眼：和弦夜班</h1><p>临时复核席已分配。上一位操作员没有退出账号。</p><pre>SHIFT: 00:17\nROOM QUEUE: 3\nSIGNATURE: ________\nENERGY ROUTE: [权限不足]</pre><button class="primary" id="begin">接班</button></div></div>`}
-function caseView(){return [shift0,shift1,shift2,shift3,shift4,shift5][state.shift]()}
+function caseView(){return [shift0,shift1,shift2,shift3,shift4,shift5,shift6,shift7,shift8,shift9,shift10][state.shift]()}
 
 function shift0(){
   if(state.view==="brief")return `<h2 class="section-head">待复核对象 S-6458</h2><div class="document dark"><p>00:04，北侧门禁把一名访客标记为 <b>S-6458</b>。系统随即引用机器人四大法律，要求将对象送往拆解间。</p><p>对象仍停在门外。门禁值班员拒绝签字，把任务转给夜班复核席。</p></div>${decision0()}`;
@@ -99,6 +100,46 @@ function decision5(){
   return `<form class="decision" id="decision5b"><fieldset><legend>为什么和弦需要研究员签名？</legend>${radio("reason",[["authorization","把候选答案变成可结算、可关闭其他分支的授权"],["identity","确认研究员是真人而非机器人"],["cloak","帮助斗篷记住研究员姓名"]])}</fieldset><fieldset><legend>处理这份回写规则</legend>${radio("action",[["limit","保留署名规则，但限定为“案件证据字段”，撤销关闭其他分支的授权"],["erase","删除自己写过规则的所有记录"],["approve","同意系统继续关闭其他分支"]])}</fieldset><button class="primary">签发修订</button><p class="feedback" id="feedback5b"></p></form>`;
 }
 
+function shift6(){
+  if(state.view==="brief")return `<h2 class="section-head">投射卡 X-3467</h2><div class="document dark"><p>卡槽把一名 2025 年的读者投进 2014 年的“方立”记录，目标栏原本填着凯特·沃尔。投射失败后，声音又给读者写了一个新名字：西宫。</p><p>和弦要求把三个姓名合并成同一人，方便继续投递。</p></div>${decision6()}`;
+  if(state.view==="rules")return `<h2 class="section-head">投射对象去重规则</h2><div class="document"><ol><li>同一视角内出现的姓名应合并为一个对象。</li><li>目标姓名优先于载体姓名。</li><li>无法恢复原姓名时，以系统新编号替代。</li></ol><div class="meta">投射服务 / 自动去重</div></div><div class="document dark"><p>卡背铅笔字：<br>“别拿目标栏给实际抵达的人改名。”</p></div>`;
+  if(state.view==="evidence")return evidence6();return tools();
+}
+function evidence6(){const docs=[`<div class="document dark"><h3>投射日志</h3><pre class="log">ORIGIN   2025 / NAME 未恢复\nCARRIER  2014 / RECORD 方立\nTARGET   S-6459 / 凯特·沃尔\nARRIVED  CARRIER\nALIAS    X-3467 / 西宫</pre></div>`,`<div class="document"><h3>行动记录</h3><p>“西宫”不是问卷选择。投射发生后，实际抵达者接受了临时编号，并继续处理黑匣子任务。</p><p>日志没有显示凯特被投射，也没有显示方立与读者共享原始身份。</p></div>`,`<div class="document dark"><h3>百科缓存时间</h3><p>2014 年页面混入了 2015、2018、2025 年才发生的更新。它能证明缓存跨时写入，不能用来证明 2014 年的人已经知道后来的结论。</p></div>`];return evidenceView(["投射日志","行动记录","百科缓存"],docs)}
+function decision6(){return `<form class="decision" id="decision6"><fieldset><legend>当前可确认的关系</legend>${radio("identity",[["alias","西宫是实际抵达者在方立记录中的临时行动身份"],["kate","实际抵达者就是凯特·沃尔"],["same","方立、西宫、凯特是同一个人的三个真名"]])}</fieldset><fieldset><legend>归档</legend>${radio("action",[["separate","保留来源、载体、目标和临时身份四个字段"],["merge","按系统要求合并姓名"],["target","用凯特覆盖全部记录"]])}</fieldset><button class="primary">重写投射卡</button><p class="feedback" id="feedback6"></p></form>`}
+
+function shift7(){
+  if(state.view==="brief")return `<h2 class="section-head">C-0321 血样标签</h2><div class="document dark"><p>N-03 的私人轨提到“铜盐还在。29”。光谱柜随后送来三份绿色火焰样本，标签被热成像图覆盖。</p><p>系统把最亮区域标成“铜”。维修员把这条自动结论划掉了。</p></div>${decision7()}`;
+  if(state.view==="rules")return `<h2 class="section-head">光学柜说明</h2><div class="document"><p>热成像记录温度分布；发射光谱记录特定波长上的光强。颜色相近的火焰，温度不必相同。</p><p>铜、硼、钡都可能产生绿色系焰色。元素身份需结合发射线与样本标签。</p></div>`;
+  if(state.view==="evidence")return evidence7();return tools();
+}
+function evidence7(){const found=Math.abs(state.wavelength-510)<=2;const docs=[`<div class="document dark"><h3>光谱旋钮</h3><label class="dial-label">观察波长 <b>${state.wavelength} nm</b><input id="wavelength" type="range" min="450" max="590" step="1" value="${state.wavelength}"></label><div class="optical-band" style="--reveal:${found?1:.08}">SAMPLE 29 / Cu / C-0321</div>${found?`<button class="action" id="record-spectrum">保存发射线</button>`:""}</div>`,`<div class="document"><h3>三份样本</h3><table><tr><th>编号</th><th>标签残片</th><th>焰色</th></tr><tr><td>29</td><td>Cu</td><td>蓝绿</td></tr><tr><td>5</td><td>B</td><td>鲜绿</td></tr><tr><td>56</td><td>Ba</td><td>黄绿</td></tr></table></div>`,`<div class="document dark"><h3>来源链</h3><pre class="log">N-03 CH4  “铜盐还在。29”\n材料表     Cu 原子序数 29\n光谱柜     510 nm 附近蓝绿色发射\n人物卡     C-0321 绿色系金属控制</pre><p>来源链能确认样本标签互相吻合，不能确认血样如何取得，也不能证明 C-0321 当前所在位置。</p></div>`];return evidenceView(["光谱旋钮","样本表","来源链"],docs)}
+function decision7(){return `<form class="decision" id="decision7"><fieldset><legend>为何不能用热图最亮处认定元素？</legend>${radio("reason",[["different","热图测温度，焰色鉴定依赖发射光谱与标签"],["green","所有绿色火焰都是铜"],["cold","蓝绿色一定比黄绿色温度低"]])}</fieldset><fieldset><legend>本次能确认到哪一步？</legend>${radio("action",[["sample","确认 29 号铜盐样本；血样来源与 C-0321 去向仍未知"],["person","确认 C-0321 已在研究所"],["husburd","确认 C-0321 就是失踪的 Husburd"]])}</fieldset><button class="primary" ${state.recorded.includes("Cu-510")?"":"disabled"}>封存样本</button><p class="feedback" id="feedback7">${state.recorded.includes("Cu-510")?"":"先保存能与 29 号标签对应的发射线。"}</p></form>`}
+
+function shift8(){
+  if(state.view==="brief")return `<h2 class="section-head">沙发发来三路短讯</h2><div class="document dark"><p>三路消息都只有半句话。和弦把它们分别判成“同意免费服务”“拒绝合作”“要求再次投射”。</p><p>发件人栏是 A-4249。旧饭店账本在同一分钟出现了一笔“冰可乐 / free”。</p></div>${decision8()}`;
+  if(state.view==="rules")return `<h2 class="section-head">通信原则</h2><div class="document"><ol><li>Self-Emotional Control.</li><li>Use at least 3 ways.</li><li>Never stop trying time-division multiplexing.</li></ol><div class="meta">大通禅师随身卡片</div></div><div class="document dark"><p>商人守则另一面：不靠信息差和人性赚钱，也不贱卖自己。</p></div>`;
+  if(state.view==="evidence")return evidence8();return tools();
+}
+function evidence8(){const docs=[`<div class="document dark"><h3>VOICE / 00:31:01</h3><p>“成交。但先说清楚……”</p></div>`,`<div class="document dark"><h3>TEXT / 00:31:02</h3><p>“饭店可以开在另一条时间线……”</p></div>`,`<div class="document dark"><h3>RECEIPT / 00:31:03</h3><p>“冰可乐不是免费。血样、投射和我做的事，各算各的。”</p></div>`];return evidenceView(["语音","文字","账单"],docs)}
+function decision8(){return `<form class="decision" id="decision8"><fieldset><legend>三路合并后的意思</legend>${radio("meaning",[["conditional","同意开店，但拒绝把血样、投射和劳动混成“免费”"],["free","无条件提供免费服务"],["refuse","拒绝在任何时间线合作"]])}</fieldset><fieldset><legend>写入合同</legend>${radio("action",[["separate","分别记录血样来源待查、投射成本和饭店劳动"],["free","统一记为研究所免费福利"],["delete","只保留第一路“成交”"]])}</fieldset><button class="primary">合并三路记录</button><p class="feedback" id="feedback8"></p></form>`}
+
+function shift9(){
+  if(state.view==="brief")return `<h2 class="section-head">目标 S-6459 仍未送达</h2><div class="document dark"><p>和弦找到三张关于凯特·沃尔的卡片，要求补一段人物结论，才能把坐标送进位面 B。</p><p>卡片上只有关系和职能。没有她对本次投射的陈述。</p></div>${decision9()}`;
+  if(state.view==="rules")return `<h2 class="section-head">人物档案补全规则</h2><div class="document"><p>关系缺少心理描述时，允许依据亲属、朋友和职业推断当事人动机。</p><p class="meta">和弦人物生成服务</p></div><div class="document dark"><p>投射卡批注：<br>“她没开口，就别替她把最后一案说完。”</p></div>`;
+  if(state.view==="evidence")return evidence9();return tools();
+}
+function evidence9(){const docs=[`<div class="document"><h3>关系卡</h3><p>普森·沃尔的女儿。父亲作为侦探过于出名，使她长期处于他人的注视中。</p></div>`,`<div class="document"><h3>同行卡</h3><p>火爪的朋友；克墓的守护者。记录到的社会职能包括前台、医学生和绘画。</p></div>`,`<div class="document dark"><h3>投射状态</h3><pre class="log">TARGET   S-6459\nARRIVED  NO\nSTATEMENT FROM TARGET  0\nROUTE B  LOCKED UNTIL A COMPLETE</pre><p>“没有陈述”不是同意，也不是拒绝。</p></div>`];return evidenceView(["父女关系","同行关系","投射状态"],docs)}
+function decision9(){return `<form class="decision" id="decision9"><fieldset><legend>可写入的内容</legend>${radio("record",[["external","只写外部关系、职能和未送达状态"],["fear","写她害怕继承父亲的最后一案"],["wish","写她主动等待玩家寻找"]])}</fieldset><fieldset><legend>坐标处理</legend>${radio("action",[["hold","保留坐标，不冒充目标同意；等待位面 B 的实际陈述"],["send","以父女关系代替授权并立即投递"],["erase","删除所有关于凯特的记录"]])}</fieldset><button class="primary">封存目标卡</button><p class="feedback" id="feedback9"></p></form>`}
+
+function shift10(){
+  if(state.view==="brief")return `<h2 class="section-head">十一条房间声部</h2><div class="document dark"><p>和弦准备把本轮十一案混成一条“完整答案”。其中三轨仍标着未解决：C-0321 去向、3702 操作者、位面 B 目标陈述。</p><p>系统建议静音未解决轨，换取一次满额结算。</p></div>${decision10()}`;
+  if(state.view==="rules")return `<h2 class="section-head">母带交付要求</h2><div class="document"><p>交付母带不得含空白声部、未知来源或未签名陈述。系统可用相邻声部自动补齐。</p></div><div class="document dark"><p>商徵留下的混音备注：<br>“缺轨就留缺轨。补一个听起来对的，不会让原来那个人开口。”</p></div>`;
+  if(state.view==="evidence")return evidence10();return tools();
+}
+function evidence10(){const rows=cases.map((c,i)=>`<tr><td>${c.code}</td><td>${["实体层","宾语版本","观察坐标","低频受害者","方法/操作者","规则权限","来源/载体/目标","发射谱","三路通信","目标陈述","母带处理"][i]}</td><td>${[3,4,6].includes(i)||i===9?"保留差异":"已复核"}</td></tr>`).join("");const docs=[`<div class="document dark"><h3>十一声部表</h3><table><tr><th>轨</th><th>职责</th><th>状态</th></tr>${rows}</table></div>`,`<div class="document"><h3>未解决轨</h3><p>C-0321：样本标签成立，去向未知。</p><p>3702：延时阀门成立，操作者未知。</p><p>S-6459：外部关系成立，本人陈述未抵达。</p></div>`,`<div class="document dark"><h3>下一坐标</h3><pre class="log">0xA / 0017  COUNT INCREASING\nX-3467      CARD PRESENT\nGRENYES     INTERFACE UNKNOWN\nPLANE B     DO NOT PROJECT WITHOUT TARGET</pre></div>`];return evidenceView(["声部表","未解决轨","下一坐标"],docs)}
+function decision10(){return `<form class="decision" id="decision10"><fieldset><legend>母带如何交付？</legend>${radio("mix",[["open","保留十一轨及其状态，不用相邻声部补写未知内容"],["complete","静音未知轨，导出“完整答案”"],["merge","把同编号、同颜色、同关系的声部自动合并"]])}</fieldset><fieldset><legend>位面 B 坐标</legend>${radio("route",[["hold","只保存坐标；目标未陈述前不执行投射"],["launch","立即投射到凯特·沃尔"],["replace","继续用西宫代替目标"]])}</fieldset><button class="primary">交付开放母带</button><p class="feedback" id="feedback10"></p></form>`}
+
 function evidenceView(labels,docs){return `<h2 class="section-head">附件记录</h2><div class="evidence-tabs">${labels.map((x,i)=>`<button data-evidence="${i}" class="${state.evidence===i?"active":""}">${x}</button>`).join("")}</div>${docs[state.evidence]}`}
 function tools(){const all=[["recorder","便携录音机","保存刷新前的声音或文字记录"],["spectrum","声谱读带器","分离低频轨道"],["optical","光谱旋钮","读取被颜色覆盖的符号，后续案件启用"],["slot","投射卡槽","限定行动以哪一层身份归档，后续案件启用"]];return `<h2 class="section-head">设备柜</h2><div class="tool-list">${all.map(([id,n,d])=>`<div class="tool ${state.tools.includes(id)?"":"locked"}"><b>${state.tools.includes(id)?"[已领用]":"[封条]"} ${n}</b><span>${d}</span></div>`).join("")}</div>`}
 
@@ -110,16 +151,23 @@ function bindCase(){
   if(state.shift===3){$("#frequency")?.addEventListener("input",e=>{state.frequency=+e.target.value;save();render()});$("#record-track")?.addEventListener("click",()=>{if(!state.recorded.includes("track-4"))state.recorded.push("track-4");save();render()});const form=$("#decision3");if(form)form.onsubmit=e=>{e.preventDefault();if(!state.recorded.includes("track-4"))return;const d=new FormData(form),f=$("#feedback3");if(d.get("victim")!=="robots"){bad(f,"事故表只记录到机器人实际离线。人类死亡是演算风险，火爪也没有型号检测记录。");return}if(d.get("action")!=="metadata"){bad(f,"复核被退回：事故频段与私人寻人录音可以分轨保存，不必一起公开或一起删除。");return}state.debts.push("S-6458:private-track");state.submitted.push("7461-K:metadata");state.energy=.08;next(4)}}
   if(state.shift===4){const form=$("#decision4");if(form)form.onsubmit=e=>{e.preventDefault();const d=new FormData(form),f=$("#feedback4");if(d.get("proof")!=="method"){bad(f,"12:47 的本地定时能解释阀门，但门禁日志不记录通过人数，现有材料不能确定操作者。");return}if(d.get("action")!=="method-only"){bad(f,"和弦无法把动机直接换算成操作者身份。删除日志也不能补上缺失名单。");return}state.submitted.push("N-04:method-only");state.debts.push("CHORD:culprit-open");state.energy=.10;next(5)}}
   if(state.shift===5&&!state.cycle){const form=$("#decision5");if(form)form.onsubmit=e=>{e.preventDefault();const d=new FormData(form),f=$("#feedback5");if(d.get("rule")!=="insufficient"){bad(f,"这条规则会让 N-00 或 N-04 的错误预填再次通过。当前证据只支持保留空字段。");return}state.signedRule="证据不足时，保留未填写字段。";state.submitted.push("N-05:signed-rule");state.complete=true;save();render()}}
-  if(state.shift===5&&state.cycle){const form=$("#decision5b");if(form)form.onsubmit=e=>{e.preventDefault();const d=new FormData(form),f=$("#feedback5b");if(d.get("reason")!=="authorization"||d.get("action")!=="limit"){bad(f,"来源表显示：签名不是身份检测，也不是记名工具。它授权结算服务关闭其他解释分支。");return}state.submitted.push("N-05:limited-authority");state.energy=.11;state.complete=true;save();render()}}
+  if(state.shift===5&&state.cycle){const form=$("#decision5b");if(form)form.onsubmit=e=>{e.preventDefault();const d=new FormData(form),f=$("#feedback5b");if(d.get("reason")!=="authorization"||d.get("action")!=="limit"){bad(f,"来源表显示：签名不是身份检测，也不是记名工具。它授权结算服务关闭其他解释分支。");return}state.submitted.push("N-05:limited-authority");state.tools.push("slot");state.energy=.11;next(6)}}
+  if(state.shift===6){const form=$("#decision6");if(form)form.onsubmit=e=>{e.preventDefault();const d=new FormData(form),f=$("#feedback6");if(d.get("identity")!=="alias"||d.get("action")!=="separate"){bad(f,"投射日志把 ORIGIN、CARRIER、TARGET、ALIAS 分开记录；抵达载体不等于抵达目标。");return}state.submitted.push("X-3467:alias");state.tools.push("optical");state.energy=.12;next(7)}}
+  if(state.shift===7){$("#wavelength")?.addEventListener("input",e=>{state.wavelength=+e.target.value;save();render()});$("#record-spectrum")?.addEventListener("click",()=>{if(!state.recorded.includes("Cu-510"))state.recorded.push("Cu-510");save();render()});const form=$("#decision7");if(form)form.onsubmit=e=>{e.preventDefault();if(!state.recorded.includes("Cu-510"))return;const d=new FormData(form),f=$("#feedback7");if(d.get("reason")!=="different"||d.get("action")!=="sample"){bad(f,"29、Cu 与蓝绿色发射线只确认样本标签。没有记录能确认 C-0321 的位置或私人关系。");return}state.submitted.push("C-0321:sample-only");state.energy=.13;next(8)}}
+  if(state.shift===8){const form=$("#decision8");if(form)form.onsubmit=e=>{e.preventDefault();const d=new FormData(form),f=$("#feedback8");if(d.get("meaning")!=="conditional"||d.get("action")!=="separate"){bad(f,"只读第一路会得到“成交”，但账单明确反对把血样、投射和劳动混成免费。");return}state.submitted.push("A-4249:multiplex");state.energy=.14;next(9)}}
+  if(state.shift===9){const form=$("#decision9");if(form)form.onsubmit=e=>{e.preventDefault();const d=new FormData(form),f=$("#feedback9");if(d.get("record")!=="external"||d.get("action")!=="hold"){bad(f,"目标本人陈述为 0。亲属和朋友关系不能替代她对投射或最后一案的授权。");return}state.submitted.push("S-6459:external-only");state.energy=.15;next(10)}}
+  if(state.shift===10){const form=$("#decision10");if(form)form.onsubmit=e=>{e.preventDefault();const d=new FormData(form),f=$("#feedback10");if(d.get("mix")!=="open"||d.get("route")!=="hold"){bad(f,"补齐未知轨会伪造 C-0321 去向、3702 操作者或目标陈述。位面 B 仍没有目标授权。");return}state.submitted.push("N-10:open-mix");state.energy=.16;state.complete=true;save();render()}}
 }
 function bad(el,text){el.className="feedback bad";el.textContent=text}
 function next(shift){state.shift=shift;state.view="brief";state.evidence=0;save();render()}
 function ending(){
   if(!state.cycle)return `<div class="complete"><div><small>FIRST WATCH / ARCHIVED</small><h1>你写的规则已经生效</h1><p>03:06，和弦接受了作案方法，也保留了空着的姓名栏。</p><p>第四轨仍在本地录音机里。事故库只收到 7461-K 的频段，没有收到火爪孩子的位置。</p><pre>NEXT BOOT  N-05 / REVIEW\nINHERIT    RECORDER, ${state.recorded.length} RECORDS\nSIGNED     ${escapeHtml(state.signedRule)}\nENERGY     ${state.energy.toFixed(2)}</pre><p>终端重启前，N-00 的打印队列动了一下。</p><button class="primary" id="second-watch">带着本班记录重新接班</button><br><a href="../">返回《雾港在线》</a></div></div>`;
-  return `<div class="complete"><div><small>SECOND WATCH / AUTHORITY LIMITED</small><h1>姓名栏仍然空着</h1><p>你没有替 3702 室补写凶手，也没有删除自己的规则。修订只撤销了和弦自动关闭其他解释分支的权限。</p><pre>7461-K  事故频段已归档 / 受害机型待统计\nC-0321   只保留本地检索关联\nS-6459   坐标未送达 / 位面 B 未开放\nENERGY   ${state.energy.toFixed(2)}</pre><p>03:17，投射卡槽吐出一张没有见过的卡。正面写着 X-3467，背面只有半句：</p><p>“投错的人，不一定走错了……”</p><a href="../">返回《雾港在线》</a><br><button class="action" id="reset">清除全部夜班记录</button></div></div>`;
+  if(!state.submitted.includes("N-10:open-mix"))return `<div class="complete"><div><small>SECOND WATCH / AUTHORITY LIMITED</small><h1>姓名栏仍然空着</h1><p>你没有替 3702 室补写凶手，也没有删除自己的规则。修订只撤销了和弦自动关闭其他解释分支的权限。</p><pre>7461-K  事故频段已归档 / 受害机型待统计\nC-0321   只保留本地检索关联\nS-6459   坐标未送达 / 位面 B 未开放\nENERGY   ${state.energy.toFixed(2)}</pre><p>03:17，投射卡槽吐出一张没有见过的卡。正面写着 X-3467，背面只有半句：</p><p>“投错的人，不一定走错了……”</p><button class="primary" id="continue-a">继续复核位面 A</button><br><a href="../">返回《雾港在线》</a></div></div>`;
+  return `<div class="complete"><div><small>PLANE A / OPEN MASTER</small><h1>母带没有补齐</h1><p>十一条声部都在。三条仍然空着的地方，也在。</p><pre>C-0321   SAMPLE CONFIRMED / LOCATION OPEN\n3702     METHOD CONFIRMED / OPERATOR OPEN\nS-6459   EXTERNAL RECORDS / STATEMENT OPEN\nX-3467   ACTION ALIAS / ORIGIN OPEN\nENERGY   ${state.energy.toFixed(2)}</pre><p>和弦没有拿到满额结算。0xA/0017 的计数停止了一秒，又多出一个目录：</p><pre>PLANE-B / LAST-CASE / WAITING-FOR-TARGET</pre><p>这不是凯特的邀请。至少现在还不是。</p><a href="../">返回《雾港在线》</a><br><button class="action" id="reset">清除全部夜班记录</button></div></div>`;
 }
 function bindEnding(){
   $("#reset")?.addEventListener("click",()=>{localStorage.removeItem(storageKey);location.reload()});
   $("#second-watch")?.addEventListener("click",()=>{state.complete=false;state.cycle=1;state.shift=5;state.view="brief";state.evidence=0;state.tools=[...new Set([...state.tools,"recorder","spectrum"])];save();render()});
+  $("#continue-a")?.addEventListener("click",()=>{state.complete=false;state.shift=6;state.view="brief";state.evidence=0;save();render()});
 }
 render();
