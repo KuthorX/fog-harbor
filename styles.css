@@ -1224,6 +1224,9 @@ button {
   .task-button {
     display: none;
   }
+  [data-minimize] {
+    display: none;
+  }
   .wallpaper-copy {
     display: none;
   }
