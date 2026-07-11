@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#008080">
+  <title>雾港在线 2000</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="crt" aria-hidden="true"></div>
+  <section id="cold-open" class="cold-open">
+    <div class="restore-box">
+      <div class="restore-title">档案恢复程序 4.0</div>
+      <div class="restore-body">
+        <div class="drive">C:</div>
+        <p>发现一份未完成的校园网镜像。</p>
+        <p class="mono">卷标：FOGHARBOR_2000<br>最后写入：2000-01-01 00:17:03</p>
+        <label><input type="checkbox" id="sound-toggle"> 启用系统音效</label>
+        <button id="restore">恢复桌面</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="desktop" class="desktop" hidden>
+    <div class="wallpaper-copy"><b>FOG HARBOR</b><span>校园网络试验版</span></div>
+    <div class="desktop-icons">
+      <button data-open="computer"><span class="pixel-icon computer-icon"></span><em>我的电脑</em></button>
+      <button data-open="browser"><span class="pixel-icon browser-icon">e</span><em>Internet</em></button>
+      <button data-open="mail"><span class="pixel-icon mail-icon"></span><em>Outlook Express</em></button>
+      <button data-open="radio"><span class="pixel-icon radio-icon">▶</span><em>Winamp</em></button>
+      <button data-open="notes"><span class="pixel-icon note-icon"></span><em>记事本</em></button>
+      <button data-open="trash"><span class="pixel-icon trash-icon"></span><em>回收站</em></button>
+    </div>
+
+    <div id="windows"></div>
+    <div id="system-dialog" class="dialog" hidden></div>
+
+    <footer class="taskbar">
+      <button id="start"><span class="win-logo">◆</span> 开始</button>
+      <div id="tasks"></div>
+      <div class="tray"><span>▥</span><span id="net-state">脱机</span><time id="clock">00:17</time></div>
+    </footer>
+    <div id="start-menu" class="start-menu" hidden>
+      <div class="start-side">雾港 <b>2000</b></div>
+      <div class="start-items">
+        <button data-open="browser">🌐 Internet</button><button data-open="mail">✉ 电子邮件</button>
+        <hr><button data-open="computer">▣ 文档</button><button data-open="notes">▤ 记事本</button>
+        <hr><button id="shutdown">▣ 关闭系统...</button>
+      </div>
+    </div>
+  </section>
+
+  <template id="window-template">
+    <section class="window">
+      <header class="titlebar"><span class="title"></span><div><button data-minimize>_</button><button data-close>×</button></div></header>
+      <div class="menubar">文件(F)　编辑(E)　查看(V)　帮助(H)</div>
+      <div class="window-body"></div>
+      <footer class="statusbar"><span>就绪</span><span class="page-code"></span></footer>
+    </section>
+  </template>
+  <script src="game.js"></script>
+</body>
+</html>
