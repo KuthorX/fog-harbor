@@ -20,7 +20,7 @@ function render(){
   bindCase();
 }
 
-function boot(){return `<div class="complete"><div><small>CHORD SYSTEM / LOCAL BOOT</small><h1>苍绿之眼：和弦夜班</h1><p>临时复核席已分配。上一位操作员没有退出账号。</p><pre>SHIFT: 00:17\nROOM QUEUE: 3\nSIGNATURE: ________\nENERGY ROUTE: [权限不足]</pre><button class="primary" id="begin">接班</button></div></div>`}
+function boot(){return `<div class="complete"><div><small>CHORD SYSTEM / LOCAL BOOT</small><h1>苍绿之眼：和弦夜班</h1><p>临时复核席已分配。上一位操作员没有退出账号。</p><pre>SHIFT: 00:17\nROOM QUEUE: 11\nSIGNATURE: ________\nENERGY ROUTE: [权限不足]</pre><button class="primary" id="begin">接班</button></div></div>`}
 function caseView(){return [shift0,shift1,shift2,shift3,shift4,shift5,shift6,shift7,shift8,shift9,shift10][state.shift]()}
 
 function shift0(){
@@ -88,7 +88,7 @@ function shift5(){
   return tools();
 }
 function rules5(){
-  if(!state.cycle)return `<h2 class="section-head">新增夜班规则</h2><div class="document"><p>请选择一条，签入下次轮班手册：</p><ol><li>编号相同的对象，按同一实体处置。</li><li>证据不足时，保留未填写字段。</li><li>为了完成结算，可以采用系统预填答案。</li></ol><p class="meta">作者：待签名　适用层：待填写</p></div>`;
+  if(!state.cycle)return `<h2 class="section-head">新增夜班规则</h2><div class="document"><p>系统生成了三条候选文本。不要直接采用；根据本班留下的记录，在规则编辑器中自行写入：</p><ol><li>编号相同的对象，按同一实体处置。</li><li>证据不足时，保留未填写字段。</li><li>为了完成结算，可以采用系统预填答案。</li></ol><p class="meta">作者：待签名　适用层：待填写</p></div>`;
   return `<h2 class="section-head">N-00 封存副本</h2><div class="document"><ol><li>终端识别到 K/S 型号，应调取对应机器人法律。</li><li><b>${escapeHtml(state.signedRule)}</b></li><li>复核员签名视为授权和弦关闭其他解释分支。</li></ol><p class="meta">合并来源：F 类表单 / CLOAK-17 / ${escapeHtml(state.identity)}</p></div><div class="document dark"><p>第一条来自旧表单。第二条是你写的。斗篷只改过句末宾语。第三条由结算服务追加。</p></div>`;
 }
 function evidence5(){
