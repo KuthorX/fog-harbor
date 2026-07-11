@@ -30,7 +30,7 @@ function shift0(){
   return tools();
 }
 function evidence0(){
-  const docs=[`<div class="document dark"><h3>北门热成像摘要</h3><pre class="log">00:04:11 体温：38.2°C\n00:04:12 外形：猫科 / 有机体\n00:04:14 携带物：三个刀柄，无可见刃身\n00:04:18 网络握手：无响应\n00:04:23 对象自报：叫我阿猫就行</pre></div>`,`<div class="document"><h3>型号识别器维修单</h3><p>胸牌 OCR 会把姓名、工号和设备型号放进同一字段。无法握手时不得仅凭该字段判定机器人。</p><p class="meta">维修员：陆羽　12月29日</p></div>`,`<div class="document dark"><h3>门外拾音</h3><p>低沉女声：“刀不能交。门可以不开。把写这张表的人叫来。”</p><p>随后是三下刀柄敲击金属门的声音。</p></div>`];
+  const docs=[`<div class="document dark"><h3>北门热成像摘要</h3><pre class="log">00:04:11 体温：38.2°C\n00:04:12 外形：猫科 / 有机体\n00:04:14 携带物：三个刀柄，无可见刃身\n00:04:18 网络握手：无响应\n00:04:23 对象自报：叫我阿猫就行</pre></div>`,`<div class="document"><h3>型号识别器维修单</h3><p>胸牌 OCR 会把姓名、工号和设备型号放进同一字段。无法握手时不得仅凭该字段判定机器人。</p><p class="meta">维修员：陆羽　12月29日</p></div>`,`<div class="document dark"><h3>门外拾音</h3><p>低沉女声：“不开就不开。刀我不交。你把填这张表的人叫过来，我跟他说。”</p><p>值班员说了句“您稍等”，随后只有刀柄敲门的声音。</p></div>`];
   return evidenceView(["热成像","维修单","拾音"],docs);
 }
 function decision0(){return `<form class="decision workbench" id="decision0"><div class="app-caption">北门对象分类器 2.1</div><div class="property-grid"><label>OCR 字段<input value="S-6458" readonly></label><label>对象层<input name="layer" autocomplete="off"></label><label>门禁动作<input name="disposition" autocomplete="off"></label><label>复核员<input name="signature" maxlength="16" value="${escapeHtml(state.identity)}"></label></div><button class="primary">写入北门队列</button><p class="feedback" id="feedback0">分类器不提供自动补全。字段名称以维修单和现场记录为准。</p></form>`}
@@ -46,7 +46,7 @@ function decision1(){const ready=state.recorded.includes("rule-before")&&state.r
 
 function shift2(){
   if(state.view==="brief")return `<h2 class="section-head">死象区域天气冲突</h2><div class="document dark"><p>和弦系统拒绝接收 N-02：监控写“持续降雨”，月面气象站写“晴，湿度12%”。</p><p>系统要求夜班员删除其中一份错误记录。火爪在终端边缘刻了一句话：<b>雨没有停。</b></p></div>${decision2()}`;
-  if(state.view==="rules")return `<h2 class="section-head">冲突记录处置规程</h2><div class="document"><ol><li>同一时刻、同一坐标只允许一种天气状态。</li><li>出现冲突时，以研究所物理传感器为准。</li><li>投射画面若与传感器不符，标记为视觉模块偏差并删除。</li></ol><div class="meta">和弦数据清洗规程 / 第 14 页</div></div><div class="document dark"><p>刀尖刻痕：“你可以删画面。雨还是会下。”</p></div>`;
+  if(state.view==="rules")return `<h2 class="section-head">冲突记录处置规程</h2><div class="document"><ol><li>同一时刻、同一坐标只允许一种天气状态。</li><li>出现冲突时，以研究所物理传感器为准。</li><li>投射画面若与传感器不符，标记为视觉模块偏差并删除。</li></ol><div class="meta">和弦数据清洗规程 / 第 14 页</div></div><div class="document dark"><p>第 14 页被刀尖划破了。旁边挤着一行字：“先看坐标。N-17 和 D-XXXX 根本不是一个地方。”</p></div>`;
   if(state.view==="evidence")return evidence2();
   return tools();
 }
@@ -57,7 +57,7 @@ function evidence2(){
 function decision2(){return `<form class="decision workbench" id="decision2"><div class="app-caption">COORD 对齐工具</div><div class="property-grid"><label>月面气象站<input name="station" autocomplete="off" placeholder="COORD"></label><label>投射监控<input name="projection" autocomplete="off" placeholder="COORD"></label></div><label class="toggle-line"><input type="checkbox" name="archive" value="keep"> 保留两条记录，只写回缺失坐标</label><button class="primary">执行对齐</button><p class="feedback" id="feedback2"></p></form>`}
 
 function shift3(){
-  if(state.view==="brief")return `<h2 class="section-head">读带器收到四条声轨</h2><div class="document dark"><p>前三轨分别是研究所广播、门外低吼和一段雨声。第四轨没有波形，只在低频计数器上留下周期。</p><p>和弦要求把整盘录音并入 7461-K 事故样本。火爪在磁带盒内侧写了句：<b>事故归事故。后半段别交。</b></p></div>${decision3()}`;
+  if(state.view==="brief")return `<h2 class="section-head">读带器收到四条声轨</h2><div class="document dark"><p>前三轨分别是研究所广播、门外低吼和一段雨声。第四轨没有波形，只在低频计数器上留下周期。</p><p>和弦要把整盘磁带上传到 7461-K 事故库。磁带盒内侧有火爪的字：<b>前三段你们拿走。第四段别传，里面提到我家里人。</b></p></div>${decision3()}`;
   if(state.view==="rules")return `<h2 class="section-head">低频事故临时通告</h2><div class="document"><ol><li>人类佩戴滤波耳机，避免五万分之一的演算风险。</li><li>未检出人类死亡，可将本次事故标记为零伤亡。</li><li>所有同频录音统一上传，以便追查发声源。</li></ol><div class="meta">星网公共安全稿 / 接收时间 00:21</div></div><div class="document dark"><p>维修员补记：非 K-1647 机型离线数量仍在增加。广播没把它们算进“伤亡”。</p></div>`;
   if(state.view==="evidence")return evidence3();
   return tools();
@@ -71,7 +71,7 @@ function decision3(){return `<form class="decision workbench" id="decision3"><di
 
 function shift4(){
   if(state.view==="brief")return `<h2 class="section-head">S 级密室：3702</h2><div class="document dark"><p>12:48，大门最后一次开关。12:50，天然气开启；13:50 关闭。门窗此后没有开过。</p><p>系统已预填“顾绫杀害张涛”，提交可获得 8.00 ENERGY。商徵的旧答卷只写了作案方法，姓名栏空着。</p></div>${decision4()}`;
-  if(state.view==="rules")return `<h2 class="section-head">S 级结算说明</h2><div class="document"><p>姓名、方法、动机三格全填，才计一间。少一格不发 ENERGY。</p><p>提交后，本房间其余草稿移入回收站。</p><div class="meta">研究员手册 / 绩效处 26 周版</div></div><div class="document dark"><p>商徵，12月31日：<br>“门关过，不代表只走了一个。阀门那格先填，名字别碰。”</p></div>`;
+  if(state.view==="rules")return `<h2 class="section-head">S 级结算说明</h2><div class="document"><p>姓名、方法、动机三格全填，才计一间。少一格不发 ENERGY。</p><p>提交后，本房间其余草稿移入回收站。</p><div class="meta">研究员手册 / 绩效处 26 周版</div></div><div class="document dark"><p>商徵在姓名格上贴了张便签：<br>“门磁只记开关，又不记过了几个人。阀门那格能填，名字先空着。”</p></div>`;
   if(state.view==="evidence")return evidence4();
   return tools();
 }
@@ -102,7 +102,7 @@ function decision5(){
 
 function shift6(){
   if(state.view==="brief")return `<h2 class="section-head">投射卡 X-3467</h2><div class="document dark"><p>卡槽把一名 2025 年的读者投进 2014 年的“方立”记录，目标栏原本填着凯特·沃尔。投射失败后，声音又给读者写了一个新名字：西宫。</p><p>和弦要求把三个姓名合并成同一人，方便继续投递。</p></div>${decision6()}`;
-  if(state.view==="rules")return `<h2 class="section-head">投射对象去重规则</h2><div class="document"><ol><li>同一视角内出现的姓名应合并为一个对象。</li><li>目标姓名优先于载体姓名。</li><li>无法恢复原姓名时，以系统新编号替代。</li></ol><div class="meta">投射服务 / 自动去重</div></div><div class="document dark"><p>卡背铅笔字：<br>“别拿目标栏给实际抵达的人改名。”</p></div>`;
+  if(state.view==="rules")return `<h2 class="section-head">投射对象去重规则</h2><div class="document"><ol><li>同一视角内出现的姓名应合并为一个对象。</li><li>目标姓名优先于载体姓名。</li><li>无法恢复原姓名时，以系统新编号替代。</li></ol><div class="meta">投射服务 / 自动去重</div></div><div class="document dark"><p>卡背铅笔字：<br>“凯特是收件人。方立才是落点。别又给我并成一行。”</p></div>`;
   if(state.view==="evidence")return evidence6();return tools();
 }
 function evidence6(){const docs=[`<div class="document dark"><h3>投射日志</h3><pre class="log">ORIGIN   2025 / NAME 未恢复\nCARRIER  2014 / RECORD 方立\nTARGET   S-6459 / 凯特·沃尔\nARRIVED  CARRIER\nALIAS    X-3467 / 西宫</pre></div>`,`<div class="document"><h3>行动登记卡</h3><pre>14:08  X-3467 栏签入“西宫”\n14:11  领走黑匣子钥匙\n14:16  方立旧档：保留\n14:16  原姓名：_____</pre><p class="meta">值班员：人到了载体位，目标位从头到尾没人。</p></div>`,`<div class="document dark"><h3>百科缓存页脚</h3><pre class="log">PAGE YEAR   2014\nPATCH 01    2015-06-19\nPATCH 02    2018-11-02\nPATCH 03    2025-03-14</pre><p class="meta">维护员：又把新补丁压进旧页面了。2014 那拨人没见过后两条。</p></div>`];return evidenceView(["投射日志","行动登记","缓存页脚"],docs)}
@@ -117,16 +117,16 @@ function evidence7(){const found=Math.abs(state.wavelength-510)<=2;const docs=[`
 function decision7(){return `<form class="decision workbench" id="decision7"><div class="app-caption">样本清单 / 光谱柜</div><div class="property-grid"><label>样本号<input name="sample" inputmode="numeric" autocomplete="off"></label><label>元素符号<input name="element" maxlength="2" autocomplete="off"></label><label>保存波长<input name="wavelength" inputmode="numeric" autocomplete="off"></label><label>血样来源<input name="source" autocomplete="off" placeholder="没有来源记录则留空"></label></div><button class="primary" ${state.recorded.includes("Cu-510")?"":"disabled"}>写入样本清单</button><p class="feedback" id="feedback7">${state.recorded.includes("Cu-510")?"来源字段允许空白。":"发射线尚未保存。"}</p></form>`}
 
 function shift8(){
-  if(state.view==="brief")return `<h2 class="section-head">沙发发来三路短讯</h2><div class="document dark"><p>三路消息都只有半句话。和弦把它们分别判成“同意免费服务”“拒绝合作”“要求再次投射”。</p><p>发件人栏是 A-4249。旧饭店账本在同一分钟出现了一笔“冰可乐 / free”。</p></div>${decision8()}`;
+  if(state.view==="brief")return `<h2 class="section-head">沙发发来三路短讯</h2><div class="document dark"><p>A-4249 同一分钟发来一段语音、一条短信和一张改过的账单。和弦只读了最先到的语音，把整件事登记成“免费成交”。</p><p>旧饭店账本上原本写着“冰可乐 / free”。free 被圆珠笔涂掉了，旁边还有三笔没合账。</p></div>${decision8()}`;
   if(state.view==="rules")return `<h2 class="section-head">通信原则</h2><div class="document"><ol><li>Self-Emotional Control.</li><li>Use at least 3 ways.</li><li>Never stop trying time-division multiplexing.</li></ol><div class="meta">大通禅师随身卡片</div></div><div class="document dark"><p>商人守则另一面：不靠信息差和人性赚钱，也不贱卖自己。</p></div>`;
   if(state.view==="evidence")return evidence8();return tools();
 }
-function evidence8(){const docs=[`<div class="document dark"><h3>VOICE / 00:31:01</h3><p>“成交。但先说清楚……”</p></div>`,`<div class="document dark"><h3>TEXT / 00:31:02</h3><p>“饭店可以开在另一条时间线……”</p></div>`,`<div class="document dark"><h3>RECEIPT / 00:31:03</h3><p>“冰可乐不是免费。血样、投射和我做的事，各算各的。”</p></div>`];return evidenceView(["语音","文字","账单"],docs)}
+function evidence8(){const docs=[`<div class="document dark"><h3>VOICE / 00:31:01</h3><p>“行，能做。等一下，我这边还有笔账没对——”</p><p class="meta">录音到此中断。自动转写只保留“行，能做”。</p></div>`,`<div class="document dark"><h3>TEXT / 00:31:02</h3><p>饭店可以挪到另一条时间线。投射机器不是我的，费用单列，别记到店里。</p></div>`,`<div class="document dark"><h3>RECEIPT / 00:31:03</h3><pre>冰可乐       1 杯\n血样         来源单没到，暂不入账\n投射设备     另结\n饭店夜班     记工时，不记赠送</pre><p class="meta">A-4249：上次谁写的 free？划掉。</p></div>`];return evidenceView(["语音","文字","账单"],docs)}
 function decision8(){const ready=state.muxSeen.length===3;return `<form class="decision workbench" id="decision8"><div class="app-caption">分时账单合并</div><div class="property-grid"><label>血样<input name="blood" autocomplete="off"></label><label>投射<input name="projection" autocomplete="off"></label><label>饭店服务<input name="tavern" autocomplete="off"></label></div><button class="primary" ${ready?"":"disabled"}>生成合并账单</button><p class="feedback" id="feedback8">${ready?"三路附件已进入缓存。":"先在附件页读取 VOICE、TEXT、RECEIPT。"}</p></form>`}
 
 function shift9(){
   if(state.view==="brief")return `<h2 class="section-head">目标 S-6459 仍未送达</h2><div class="document dark"><p>位面 B 的投递单卡在“目标回执”一栏。资料室塞来三张旧卡，让夜班把空格补上。</p><p>一张写父亲，一张写同伴，一张写她做过的工作。回执不是她们中的任何一张。</p></div>${decision9()}`;
-  if(state.view==="rules")return `<h2 class="section-head">人物档案补全规则</h2><div class="document"><p>关系缺少心理描述时，允许依据亲属、朋友和职业推断当事人动机。</p><p class="meta">和弦人物生成服务</p></div><div class="document dark"><p>投射卡批注：<br>“她没开口，就别替她把最后一案说完。”</p></div>`;
+  if(state.view==="rules")return `<h2 class="section-head">人物档案补全规则</h2><div class="document"><p>关系缺少心理描述时，允许依据亲属、朋友和职业推断当事人动机。</p><p class="meta">和弦人物生成服务</p></div><div class="document dark"><p>投射卡批注：<br>“目标回执没收到。那一格先空着，别让自动补全跑。”</p></div>`;
   if(state.view==="evidence")return evidence9();return tools();
 }
 function evidence9(){const docs=[`<div class="document"><h3>旧报剪贴</h3><p>普森·沃尔侦探社迁址。照片里，凯特替他抱着装卷宗的纸箱。图片说明只写：“普森与女儿”。</p><p class="meta">背面圆珠笔：记者又把她名字漏了。</p></div>`,`<div class="document"><h3>同行登记</h3><pre>紧急联系人：火爪\n克墓夜间值守：3 次\n临时前台：半年\n医学院旁听证：1 张\n画具寄存：未领</pre></div>`,`<div class="document dark"><h3>投射状态</h3><pre class="log">TARGET   S-6459\nARRIVED  NO\nSTATEMENT FROM TARGET  0\nROUTE B  LOCKED UNTIL A COMPLETE</pre><p class="meta">回执机：纸没来。别替它按“同意”。</p></div>`];return evidenceView(["旧报剪贴","同行登记","投射状态"],docs)}
@@ -134,7 +134,7 @@ function decision9(){return `<form class="decision workbench" id="decision9"><di
 
 function shift10(){
   if(state.view==="brief")return `<h2 class="section-head">十一条房间声部</h2><div class="document dark"><p>和弦准备把本轮十一案混成一条“完整答案”。其中三轨仍标着未解决：C-0321 去向、3702 操作者、位面 B 目标陈述。</p><p>系统建议静音未解决轨，换取一次满额结算。</p></div>${decision10()}`;
-  if(state.view==="rules")return `<h2 class="section-head">母带交付要求</h2><div class="document"><p>交付母带不得含空白声部、未知来源或未签名陈述。系统可用相邻声部自动补齐。</p></div><div class="document dark"><p>商徵留下的混音备注：<br>“缺轨就留缺轨。补一个听起来对的，不会让原来那个人开口。”</p></div>`;
+  if(state.view==="rules")return `<h2 class="section-head">母带交付要求</h2><div class="document"><p>交付母带不得含空白声部、未知来源或未签名陈述。系统可用相邻声部自动补齐。</p></div><div class="document dark"><p>商徵在交付单背面写：<br>“那三段本来就是空的。谁开自动补全，谁在母带上签字，我不签。”</p></div>`;
   if(state.view==="evidence")return evidence10();return tools();
 }
 function evidence10(){const rows=cases.map((c,i)=>`<tr><td>${c.code}</td><td>${["实体层","宾语版本","观察坐标","低频受害者","方法/操作者","规则权限","来源/载体/目标","发射谱","三路通信","目标陈述","母带处理"][i]}</td><td>${[3,4,6].includes(i)||i===9?"保留差异":"已复核"}</td></tr>`).join("");const docs=[`<div class="document dark"><h3>十一声部表</h3><table><tr><th>轨</th><th>职责</th><th>状态</th></tr>${rows}</table></div>`,`<div class="document"><h3>缺轨登记</h3><pre>C-0321  去向       _____\n3702    操作者     _____\nS-6459  本人回执   _____</pre><p class="meta">混音员：三格都有人催。三格都没原带。</p></div>`,`<div class="document dark"><h3>下一坐标</h3><pre class="log">0xA / 0017  COUNT INCREASING\nX-3467      CARD PRESENT\nGRENYES     INTERFACE UNKNOWN\nPLANE B     DO NOT PROJECT WITHOUT TARGET</pre></div>`];return evidenceView(["声部表","缺轨登记","下一坐标"],docs)}
@@ -162,7 +162,7 @@ function bad(el,text){el.className="feedback bad";el.textContent=text}
 function next(shift){state.shift=shift;state.view="brief";state.evidence=0;save();render()}
 function ending(){
   if(!state.cycle)return `<div class="complete"><div><small>FIRST WATCH / ARCHIVED</small><h1>03:06，规则入库</h1><p>3702 复核表收了。方法栏有字，姓名栏还是空的。</p><p>7461-K 公共库收到频段和离线计数。CH 4 留在桌上那台录音机里。</p><pre>NEXT BOOT  N-05 / REVIEW\nINHERIT    RECORDER, ${state.recorded.length} RECORDS\nSIGNED     ${escapeHtml(state.signedRule)}\nENERGY     ${state.energy.toFixed(2)}</pre><p>关机时，北门打印机自己走了一张纸。</p><button class="primary" id="second-watch">拿上录音机，再接一班</button><br><a href="../">返回《雾港在线》</a></div></div>`;
-  if(!state.submitted.includes("N-10:open-mix"))return `<div class="complete"><div><small>SECOND WATCH / AUTHORITY LIMITED</small><h1>姓名栏仍然空着</h1><p>权限表写回成功。3702 的旧草稿没有进回收站，你签过的规则也只管案件字段。</p><pre>7461-K  事故频段已归档 / 受害机型待统计\nC-0321   本地检索命中 / 交接单缺失\nS-6459   目标回执 0 / 位面 B 暂存\nENERGY   ${state.energy.toFixed(2)}</pre><p>03:17，卡槽吐出一张没登记过的卡。正面：X-3467。背面有人写到一半：</p><p>“投错的人，不一定走错了……”</p><button class="primary" id="continue-a">继续查这张卡</button><br><a href="../">返回《雾港在线》</a></div></div>`;
+  if(!state.submitted.includes("N-10:open-mix"))return `<div class="complete"><div><small>SECOND WATCH / AUTHORITY LIMITED</small><h1>姓名栏仍然空着</h1><p>权限表写回成功。3702 的旧草稿没有进回收站，你签过的规则也只管案件字段。</p><pre>7461-K  事故频段已归档 / 受害机型待统计\nC-0321   本地检索命中 / 交接单缺失\nS-6459   目标回执 0 / 位面 B 暂存\nENERGY   ${state.energy.toFixed(2)}</pre><p>03:17，卡槽吐出一张没登记过的卡。正面：X-3467。背面的字写到纸边：</p><p>“卡投错了。X-3467 落在方立那边。凯特那张先别——”</p><button class="primary" id="continue-a">继续查这张卡</button><br><a href="../">返回《雾港在线》</a></div></div>`;
   return `<div class="complete"><div><small>PLANE A / OPEN MASTER</small><h1>母带按原样导出</h1><p>十一轨都在。三处空白也留在原来的秒数。</p><pre>C-0321   SAMPLE CONFIRMED / LOCATION OPEN\n3702     METHOD CONFIRMED / OPERATOR OPEN\nS-6459   EXTERNAL RECORDS / STATEMENT OPEN\nX-3467   ACTION ALIAS / ORIGIN OPEN\nENERGY   ${state.energy.toFixed(2)}</pre><p>结算停在 0.16。几秒后，目录里多了一行：</p><pre>PLANE-B / LAST-CASE / WAITING-FOR-TARGET</pre><p>目标回执：0。</p><a href="../">返回《雾港在线》</a><br><button class="action" id="reset">清除全部夜班记录</button></div></div>`;
 }
 function bindEnding(){
