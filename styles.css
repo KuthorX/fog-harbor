@@ -180,6 +180,13 @@ button {
   color: #0b5eae;
   -webkit-text-stroke: 1px white;
 }
+.projector-icon {
+  background: #171717;
+  color: #82ffbd;
+  border: 3px ridge #888;
+  box-shadow: inset 0 0 0 5px #003b35;
+  font: bold 22px "Courier New", monospace;
+}
 .mail-icon {
   background: #eee;
   border: 2px solid #777;
@@ -1004,6 +1011,132 @@ button {
   margin: 14px 0;
   border: 1px solid #aaa;
 }
+.projection-app {
+  display: grid;
+  grid-template-columns: minmax(300px, 1.35fr) minmax(260px, 0.9fr);
+  height: 100%;
+  min-height: 460px;
+  background: #111;
+  color: #d7e5dc;
+  font: 13px/1.65 "Courier New", SimSun, monospace;
+}
+.projection-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  overflow: hidden;
+  background: #061815;
+  border-right: 2px solid #66736c;
+}
+.projection-stage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: hue-rotate(18deg) saturate(0.75) contrast(1.08);
+}
+.projection-noise {
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 27px, rgba(255, 45, 164, 0.12) 28px 29px),
+    repeating-linear-gradient(0deg, #09251f 0 2px, #12362d 3px, #061815 5px);
+}
+.projection-stage > p {
+  z-index: 1;
+  color: #ffe86a;
+}
+.projection-console {
+  padding: 22px;
+  overflow: auto;
+  background: #191c1b;
+  border-left: 1px solid #000;
+}
+.projection-console > b {
+  display: block;
+  margin-bottom: 18px;
+  color: #82ffbd;
+  font-size: 16px;
+}
+.projection-console blockquote,
+.projection-log {
+  margin: 14px 0;
+  padding: 10px 12px;
+  background: #e9e2b5;
+  color: #27251d;
+  border-left: 4px solid #ff2da4;
+}
+.projection-console label {
+  display: block;
+  margin: 14px 0 7px;
+}
+.projection-console input[type="number"],
+.projection-console input[inputmode="numeric"] {
+  width: 82px;
+  padding: 4px;
+  background: #061815;
+  color: #82ffbd;
+  border: 1px solid #708078;
+}
+.projection-console input[type="range"] {
+  width: 100%;
+  accent-color: #ffdd45;
+}
+.projection-button,
+.record-choices button {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 8px;
+  background: #213a34;
+  color: #e9fff5;
+  border: 1px solid #82ffbd;
+  text-align: left;
+}
+.projection-button:hover,
+.record-choices button:hover {
+  background: #7f2458;
+}
+.projection-status {
+  min-height: 42px;
+  color: #ffe86a;
+}
+.projection-caption {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 5px 8px;
+  background: #000;
+  color: #82ffbd;
+}
+.earfish-signal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 180px;
+}
+.earfish-signal span {
+  width: 15px;
+  height: 45%;
+  background: #82ffbd;
+  box-shadow: 0 0 12px #19c8b9;
+}
+.earfish-signal span:nth-child(2),
+.earfish-signal span:nth-child(4) { height: 90%; background: #ffe86a; }
+.earfish-signal span:nth-child(3) { height: 62%; background: #ff2da4; }
+.projection-ending {
+  min-height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 36px;
+  background: #061815;
+  color: #d7e5dc;
+  font: 15px/1.8 "Courier New", SimSun, monospace;
+}
+.projection-ending > div { max-width: 560px; }
+.projection-ending h1 { color: #82ffbd; font-size: 38px; }
+.projection-ending pre { background: #000; color: #ffe86a; padding: 10px; }
+.projection-ending a { color: #ff8dcc; }
 .letter-page {
   max-width: 760px;
   margin: auto;
@@ -1094,4 +1227,9 @@ button {
   .wallpaper-copy {
     display: none;
   }
+  .projection-app {
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(190px, 38vh) 1fr;
+  }
+  .projection-stage { border-right: 0; border-bottom: 2px solid #66736c; }
 }
