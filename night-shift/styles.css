@@ -38,6 +38,8 @@ button { cursor:pointer; }
 .decision label { display:block; margin:8px 0; }
 .decision input[type="radio"] { accent-color:var(--green); }
 .decision input[type="text"] { width:min(360px,100%); padding:7px; background:#050b0a; color:var(--green); border:1px solid var(--line); }
+.field-grid fieldset:first-child { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px 16px; }
+.field-grid fieldset:first-child legend { grid-column:1/-1; }
 .primary { padding:10px 18px; background:var(--green); color:#06100d; border:1px solid var(--green); font-weight:bold; }
 .primary:disabled { opacity:.35; cursor:default; }
 .feedback { min-height:48px; margin-top:14px; padding:10px 12px; border-left:3px solid var(--yellow); background:#171d17; color:var(--yellow); }
@@ -64,6 +66,8 @@ button { cursor:pointer; }
 .document table { width:100%; border-collapse:collapse; }
 .document th,.document td { padding:8px; border:1px solid #878574; text-align:left; vertical-align:top; }
 .optical-band { margin:18px 0; padding:24px 12px; color:rgba(125,230,170,var(--reveal)); border:1px solid #29483c; background:linear-gradient(90deg,#173f8c,#29a878,#d8dd57); font-weight:bold; text-shadow:0 1px #000; }
+.shift-ledger>div { display:grid; grid-template-columns:130px 1fr; gap:8px; padding:9px 0; border-top:1px solid var(--line); }
+.shift-ledger code { display:block; color:var(--green); overflow-wrap:anywhere; }
 .statusbar { display:flex; gap:18px; padding:7px 18px; background:#070d0c; border-top:1px solid var(--line); color:var(--muted); }
 .statusbar span:last-child { margin-left:auto; }
 .complete { min-height:100vh; display:grid; place-items:center; padding:20px; background:#07100f; text-align:left; }
@@ -81,5 +85,7 @@ button { cursor:pointer; }
   .nav button { padding:8px 4px; border-left:0; border-bottom:3px solid transparent; text-align:center; font-size:12px; }
   .nav button.active { border-bottom-color:var(--green); }
   .content { padding:18px 12px 80px; }
+  .field-grid fieldset:first-child { grid-template-columns:1fr; }
+  .shift-ledger>div { grid-template-columns:1fr; }
   .statusbar { position:fixed; left:0; right:0; bottom:0; z-index:5; }
 }
